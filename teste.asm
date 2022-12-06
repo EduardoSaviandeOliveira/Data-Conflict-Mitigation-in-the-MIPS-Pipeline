@@ -1,10 +1,10 @@
 .text
 	j main
-	
+
 main:
-	add $t0, $t0, $t0
-	addi $t0, $t0, 0
-	add $t0, $t0, $t0
+	addi $t0, $zero, 1
+	add $t2, $t0, $zero
+	addi $t1, $zero, 2
 
 	j exit
 

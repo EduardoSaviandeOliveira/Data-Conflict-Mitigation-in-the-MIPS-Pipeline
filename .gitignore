@@ -1,1 +1,7 @@
 __pycache__
+teste.py
+.idea
+pyvenv.cfg
+/lib
+/bin
+/include
