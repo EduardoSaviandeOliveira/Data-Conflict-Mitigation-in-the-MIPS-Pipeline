@@ -1,8 +1,8 @@
-from assembly_reader import read_file, insertion_of_nops, write_file
+from assembly_reader import *
 
 
-if __name__ == "__main__":
-    file = "test_binaries"
+if __name__ == '__main__':
+    file = 'test_binaries'
     instructions = read_file(file)
     nop_instructions = insertion_of_nops(instructions)
     write_file(file, nop_instructions)

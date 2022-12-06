@@ -19,6 +19,8 @@ def identify_type(instruction):
         # All R-type instructions start with 000000
         if re.match('^0{6}', instruction):
             return 'R'
+        if re.match('^000100', instruction) and re.match('^00101', instruction):
+            return 'B'
         # JAL is 000011, J only jump to a label and jr is R-type
         # elif re.match('^000011', instruction):
         #     return 'J'
@@ -69,6 +71,16 @@ def insertion_of_nops(instructions):
                     for key in queue:
                         if queue[key] > 0:
                             queue[key] -= 1
+            if identify_type(instruction) == 'B':
+                for i in range(2):
+                    nop_instructions.append(nop)
+                rs = instruction[6:11]
+                rt = instruction[11:16]
+                if queue[rt] == 0 and queue[rs] == 0:
+                    nop_instructions.append(instruction)
+                    for key in queue:
+                        if queue[key] > 0:
+                            queue[key] -= 2
             if identify_type(instruction) == 'I':
                 rt = instruction[11:16]
                 rs = instruction[6:11]
