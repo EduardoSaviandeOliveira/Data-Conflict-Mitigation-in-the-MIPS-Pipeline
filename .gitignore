@@ -5,3 +5,4 @@ pyvenv.cfg
 /lib
 /bin
 /include
+*_r.txt

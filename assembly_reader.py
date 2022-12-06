@@ -13,7 +13,7 @@ def not_nop(instruction):
     return not re.match('^0{32}', instruction)
 
 
-def indentif_type(instruction):
+def identify_type(instruction):
     # Instructions that are all 0 (32) are NOP
     if not_nop(instruction):
         # All R-type instructions start with 000000
@@ -34,10 +34,10 @@ def not_null(instruction, i, ii):
 def initialize_queue(instructions):
     queue = {}
     for instruction in instructions:
-        if indentif_type(instruction) == 'R':
+        if identify_type(instruction) == 'R':
             for i in range(6, 21, 5):
                 queue.update({instruction[i:i + 5]: 0})
-        if indentif_type(instruction) == 'I':
+        if identify_type(instruction) == 'I':
             for i in range(6, 16, 5):
                 queue.update({instruction[i:i + 5]: 0})
         # if indentif_type(instruction) == 'J':
@@ -55,7 +55,7 @@ def insertion_of_nops(instructions):
     while i < len(instructions):
         instruction = instructions[i]
         if not_nop(instruction):
-            if indentif_type(instruction) == 'R':
+            if identify_type(instruction) == 'R':
                 rs = instruction[6:11]
                 rt = instruction[11:16]
                 rd = instruction[16:21]
@@ -69,7 +69,7 @@ def insertion_of_nops(instructions):
                     for key in queue:
                         if queue[key] > 0:
                             queue[key] -= 1
-            if indentif_type(instruction) == 'I':
+            if identify_type(instruction) == 'I':
                 rt = instruction[11:16]
                 rs = instruction[6:11]
                 if queue[rt] == 0 and queue[rs] == 0:
@@ -86,6 +86,6 @@ def insertion_of_nops(instructions):
 
 # write in new file with the same name, but with _R in the end
 def write_file(filename, instructions):
-    with open(filename+'_R.txt', 'w') as file:
+    with open(filename+'_r.txt', 'w') as file:
         for instruction in instructions:
             file.write(instruction + '\n')
