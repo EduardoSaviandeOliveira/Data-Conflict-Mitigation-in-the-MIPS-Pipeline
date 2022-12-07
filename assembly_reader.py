@@ -93,8 +93,46 @@ def insertion_of_nops(instructions):
                     for key in queue:
                         if queue[key] > 0:
                             queue[key] -= 1
+            if identify_type(instruction) == 'J':
+                ...
         i += 1
     return nop_instructions
+
+def order(instructions):
+    queue = initialize_queue(instructions)
+    reorder_instruction = []
+    intruction_not_used = []
+    while i < len (instructions):
+        if identify_type(instructions[i]) == 'R':
+            rs = instructions[i][6:11]
+            rt = instructions[i][11:16]
+            rd = instructions[i][16:21]
+            if queue[rd] == 0 and queue[rt] == 0 and queue[rs] == 0:
+                reorder_instruction.append(instructions[i])
+                queue[rd] += 1
+        if identify_type(instructions[i]) == 'I':
+            rs = instructions[i][6:11]
+            rt = instructions[i][11:16]
+            if queue[rt] == 0 and queue[rs] == 0:
+                reorder_instruction.append(instructions[i])
+                queue[rt] += 1
+        else :
+            intruction_not_used.append(instructions[i])
+        i += 1
+
+def instruction_reorder(instructions):
+    reorder_instruction = []
+    queue = initialize_queue(instructions)
+    queue_instruction = {}
+    i = 0
+
+    while i < len(instructions):
+        queue_instruction.update({i: instructions[i]})
+        if identify_type(instructions[i]) == 'B':
+            reorder_instruction.append(order(queue_instruction))
+
+        i += 1
+    return reorder_instruction
 
 # write in new file with the same name, but with _R in the end
 def write_file(filename, instructions):
