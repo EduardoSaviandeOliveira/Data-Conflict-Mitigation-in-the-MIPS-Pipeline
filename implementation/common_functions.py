@@ -19,7 +19,7 @@ def identify_type(instruction):
         if re.match(f"^{instructions['r_type']}", instruction):
             return 'R'
         # beq and bne start with 000100 and 000101
-        if re.match('^B', instruction) or re.match('^00101', instruction):
+        if re.match(f"^{instructions['bne']}", instruction) or re.match(f"^{instructions['beq']}", instruction):
             return 'B'
         # lw start with 100011
         else:

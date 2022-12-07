@@ -32,13 +32,15 @@ def insertion_of_nops(instructions):
                     i -= 1
                     queue = decrement_queue(queue)
             if identify_type(instruction) == 'B':
-                for i in range(2):
-                    nop_instructions.append(nop)
                 rs = instruction[6:11]
                 rt = instruction[11:16]
                 if queue[rt] == 0 and queue[rs] == 0:
                     nop_instructions.append(instruction)
-                    decrement_queue
+                    nop_instructions.append(nop)
+                else:
+                    nop_instructions.append(nop)
+                    i -= 1
+                    queue = decrement_queue(queue)
             if identify_type(instruction) == 'J':
                 ...
         i += 1
