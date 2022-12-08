@@ -26,8 +26,11 @@ def identify_type(instruction):
             return 'SW'
         else:
             return 'I'
+    elif not not_syscall(instruction):
+        return 'SYS'
     else:
         return 'NOP'
+
 
 
 def initialize_queue(instructions):

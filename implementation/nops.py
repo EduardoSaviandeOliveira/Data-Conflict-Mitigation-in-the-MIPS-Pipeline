@@ -41,6 +41,7 @@ def insertion_of_nops(instructions):
             else:
                 nop_instructions.append(nop)
                 i -= 1
+
         if instruction_type == 'SW':
             rt = instruction[11:16]
             rs = instruction[6:11]
@@ -51,8 +52,17 @@ def insertion_of_nops(instructions):
                 nop_instructions.append(nop)
                 i -= 1
 
+        if instruction_type == "SYS":
+            if queue['000010'] == 0:
+                nop_instructions.append(instruction)
+                queue.update({'000010': 1})
+            else:
+                nop_instructions.append(nop)
+                i -= 1
+
         if instruction_type == 'NOP':
             nop_instructions.append(instruction)
         queue = decrement_queue(queue)
+
         i += 1
     return nop_instructions

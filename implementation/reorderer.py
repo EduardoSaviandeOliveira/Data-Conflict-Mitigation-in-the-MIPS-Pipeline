@@ -61,6 +61,12 @@ def instruction_reorderer(instructions):
                 while len(reorder_instructions) != len(instructions):
                     reorder_instructions.append(instructions[i])
                     i =+ 1
+            if instruction_type == "SYS":
+                if queue['000010'] == 0:
+                    nop_instructions.append(instruction)
+                    queue.update({'000010': 2})
+                else:
+                    rere_instructions.append(instruction)
             i += 1
         queue = decrement_queue(queue)
     return reorder_instructions
