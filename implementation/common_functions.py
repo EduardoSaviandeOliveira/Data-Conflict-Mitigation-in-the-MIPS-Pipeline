@@ -30,6 +30,7 @@ def identify_type(instruction):
         return 'NOP'
 
 
+
 def initialize_queue(instructions):
     queue = {}
     for instruction in instructions:

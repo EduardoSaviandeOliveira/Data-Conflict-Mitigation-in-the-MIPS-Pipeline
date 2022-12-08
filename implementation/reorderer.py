@@ -51,5 +51,4 @@ def instruction_reorderer(instructions):
                     rere_instructions.append(intruction)
             i += 1
         queue = decrement_queue(queue)
-
     return reorder_instructions

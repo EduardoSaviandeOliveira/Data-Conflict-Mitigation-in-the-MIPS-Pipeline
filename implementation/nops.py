@@ -57,5 +57,5 @@ def insertion_of_nops(instructions):
 
         if identify_type(instruction) == 'NOP':
             nop_instructions.append(instruction)
-    i += 1
+        i += 1
     return nop_instructions

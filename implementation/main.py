@@ -8,4 +8,6 @@ if __name__ == '__main__':
     #instructions_nops = insertion_of_nops(instructions)
     #write_file_nops(file, instructions_nops)
     instructions_reorder = instruction_reorderer(instructions)
-    write_file_reorder(file, instructions_reorder)
+    instructions_nops = insertion_of_nops(instructions_reorder)
+    write_file_nops(file, instructions_nops)
+    #write_file_reorder(file, instructions_reorder)
