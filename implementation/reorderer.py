@@ -50,7 +50,9 @@ def instruction_reorderer(instructions):
                 else:
                     rere_instructions.append(instruction)
             if instruction_type == 'B':
-                break
+                while len(reorder_instructions) != len(instructions):
+                    reorder_instructions.append(instructions[i])
+                    i =+ 1
             i += 1
         queue = decrement_queue(queue)
     return reorder_instructions
