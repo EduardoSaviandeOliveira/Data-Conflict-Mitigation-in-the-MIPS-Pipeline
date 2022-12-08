@@ -1,12 +1,7 @@
 .text
-	j main
-	
-main:
-	add $t0, $t0, $t0
-	addi $t0, $t0, 0
-	add $t0, $t0, $t0
-
-	j exit
-
-exit:
-	nop
+	addi $t0, $zero, 1
+	addi $t1, $zero, 2
+	add $t4, $t0, $t1
+	addi $t2, $zero, 3
+	addi $t3, $zero, 4
+	add $t5, $t2, $t3

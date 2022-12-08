@@ -22,8 +22,12 @@ def identify_type(instruction):
         if re.match(f"^{instructions['bne']}", instruction) or re.match(f"^{instructions['beq']}", instruction):
             return 'B'
         # lw start with 100011
+        if re.match(f"^{instructions['sw']}", instruction):
+            return 'SW'
         else:
             return 'I'
+    else:
+        return 'NOP'
 
 
 def initialize_queue(instructions):
@@ -35,9 +39,6 @@ def initialize_queue(instructions):
         if identify_type(instruction) == 'I':
             for i in range(6, 16, 5):
                 queue.update({instruction[i:i + 5]: 0})
-        # if indentif_type(instruction) == 'J':
-        #     queue[instruction[6:11]] = 0
-        # remove 00000
     return queue
 
 def decrement_queue (queue):
