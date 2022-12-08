@@ -49,6 +49,14 @@ def instruction_reorderer(instructions):
                     queue.update({rt: 4})
                 else:
                     rere_instructions.append(instruction)
+            if instruction_type == 'SW':
+                rs = instruction[6:11]
+                rt = instruction[11:16]
+                if queue[rs] == 0 and queue[rt] == 0:
+                    reorder_instructions.append(instruction)
+                    queue.update({rt: 3})
+                else:
+                    rere_instructions.append(instruction)
             if instruction_type == 'B':
                 while len(reorder_instructions) != len(instructions):
                     reorder_instructions.append(instructions[i])

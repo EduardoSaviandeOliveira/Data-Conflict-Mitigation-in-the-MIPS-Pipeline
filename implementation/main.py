@@ -3,7 +3,7 @@ from nops import insertion_of_nops
 from reorderer import instruction_reorderer
 
 if __name__ == '__main__':
-    file = 'test_binaries'
+    file = 'test_reo'
     instructions = read_file(file)
     instructions_nops = insertion_of_nops(instructions)
     write_file_nops(file, instructions_nops)
