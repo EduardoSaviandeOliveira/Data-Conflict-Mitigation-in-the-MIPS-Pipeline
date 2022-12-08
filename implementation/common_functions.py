@@ -10,9 +10,9 @@ def not_syscall(instruction):
 
 
 def identify_type(instruction):
-    instructions = {'r_type' : '000000',
-                        'beq' : '000100', 'bne' : '000101', 'j' : '000010', 'jal' : '000011', 'jr' : '001000',
-                         'lw' : '100011', 'sw' : '101011'}
+    instructions = {'r_type': '000000',
+                    'beq': '000100', 'bne': '000101', 'j': '000010', 'jal': '000011', 'jr': '001000',
+                    'lw': '100011', 'sw': '101011'}
     # Instructions that are all 0 (32) are NOP and start with 000000 and ends with 001100 are syscall
     if not_nop(instruction) and not_syscall(instruction):
         # All R-type starts with 000000
@@ -30,7 +30,6 @@ def identify_type(instruction):
         return 'NOP'
 
 
-
 def initialize_queue(instructions):
     queue = {}
     for instruction in instructions:
@@ -42,7 +41,8 @@ def initialize_queue(instructions):
                 queue.update({instruction[i:i + 5]: 0})
     return queue
 
-def decrement_queue (queue):
+
+def decrement_queue(queue):
     decremented_queue = queue
     for key in decremented_queue:
         if decremented_queue[key] > 0:

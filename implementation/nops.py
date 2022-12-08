@@ -1,4 +1,4 @@
-from common_functions import identify_type, initialize_queue, not_nop, not_syscall, decrement_queue
+from common_functions import identify_type, initialize_queue, decrement_queue
 
 
 def insertion_of_nops(instructions):
@@ -35,25 +35,25 @@ def insertion_of_nops(instructions):
 
             # Branch add 1 nop after
         if identify_type(instruction) == 'B':
-                rs = instruction[6:11]
-                rt = instruction[11:16]
-                if queue[rt] == 0 and queue[rs] == 0:
-                    nop_instructions.append(instruction)
-                    nop_instructions.append(nop)
-                else:
-                    nop_instructions.append(nop)
-                    i -= 1
-                    queue = decrement_queue(queue)
+            rs = instruction[6:11]
+            rt = instruction[11:16]
+            if queue[rt] == 0 and queue[rs] == 0:
+                nop_instructions.append(instruction)
+                nop_instructions.append(nop)
+            else:
+                nop_instructions.append(nop)
+                i -= 1
+                queue = decrement_queue(queue)
         if identify_type(instruction) == 'SW':
-                rt = instruction[11:16]
-                rs = instruction[6:11]
-                if queue[rt] == 0 and queue[rs] == 0:
-                    nop_instructions.append(instruction)
-                    queue.update({rt: 1})
-                else:
-                    nop_instructions.append(nop)
-                    i -= 1
-                    queue = decrement_queue(queue)
+            rt = instruction[11:16]
+            rs = instruction[6:11]
+            if queue[rt] == 0 and queue[rs] == 0:
+                nop_instructions.append(instruction)
+                queue.update({rt: 1})
+            else:
+                nop_instructions.append(nop)
+                i -= 1
+                queue = decrement_queue(queue)
 
         if identify_type(instruction) == 'NOP':
             nop_instructions.append(instruction)
