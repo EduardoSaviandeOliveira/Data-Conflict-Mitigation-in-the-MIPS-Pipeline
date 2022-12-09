@@ -1,8 +1,7 @@
-.data
-	array_y: .space 100
-
 .text
-	la $t0, array_y
-	lw $t1, 0($t0)
-	addi $t1, $t1, 4
-	sw $t1, 0($t0)
+	addi $t0, $zero, 1
+	addi $t1, $zero, 2
+	add $t4, $t0, $t1
+	addi $t2, $zero, 3
+	addi $t3, $zero, 4
+	add $t5, $t2, $t3

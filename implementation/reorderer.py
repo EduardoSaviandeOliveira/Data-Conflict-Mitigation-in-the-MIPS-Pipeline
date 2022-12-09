@@ -19,7 +19,6 @@ def instruction_reorderer(instructions):
                         reorder_instructions.append(rere_instruction)
                         queue.update({rd: 4})
                         rere_instructions.remove(rere_instruction)
-                        break
                 if rere_instruction_type == 'I':
                     rs = rere_instruction[6:11]
                     rt = rere_instruction[11:16]
@@ -27,7 +26,17 @@ def instruction_reorderer(instructions):
                         reorder_instructions.append(rere_instruction)
                         queue.update({rt: 4})
                         rere_instructions.remove(rere_instruction)
-                        break
+                if instruction_type == 'SW':
+                    rs = instruction[6:11]
+                    rt = instruction[11:16]
+                    if queue[rs] == 0 and queue[rt] == 0:
+                        reorder_instructions.append(instruction)
+                        queue.update({rt: 3})
+                        rere_instructions.remove(rere_instruction)
+                if instruction_type == "SYS":
+                    if queue['000010'] == 0:
+                        nop_instructions.append(instruction)
+                        queue.update({'000010': 2})
 
         if i < len(instructions):
             instruction = instructions[i]
@@ -61,6 +70,7 @@ def instruction_reorderer(instructions):
                 while len(reorder_instructions) != len(instructions):
                     reorder_instructions.append(instructions[i])
                     i =+ 1
+                break
             if instruction_type == "SYS":
                 if queue['000010'] == 0:
                     nop_instructions.append(instruction)
